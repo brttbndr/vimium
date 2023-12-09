@@ -35,6 +35,14 @@ context("DuckDuckGo completion", () => {
   });
 });
 
+context("Kagi completion", () => {
+  should("parses results", () => {
+    const response = JSON.stringify(["the-query", ["one", "two"]]);
+    const results = new Engines.Kagi().parse(response);
+    assert.equal(["one", "two"], results);
+  });
+});
+
 context("Qwant completion", () => {
   should("parses results", () => {
     const response = JSON.stringify({

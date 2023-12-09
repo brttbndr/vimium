@@ -228,6 +228,24 @@ class Brave extends BaseEngine {
   }
 }
 
+// Kagi is a privacy-friendly search engine.
+class Kagi extends BaseEngine {
+  constructor() {
+    super({
+      engineUrl: "https://kagi.com/api/autosuggest?q=%s",
+      regexps: ["^https?://kagi\\.com/search"],
+      example: {
+        searchUrl: "https://kagi.com/search?q=%s",
+        keyword: "k",
+      },
+    });
+  }
+
+  parse(text) {
+    return JSON.parse(text)[1];
+  }
+}
+
 // On the user-facing documentation page pages/completion_engines.html, these completion search
 // engines will be shown to the user in this order.
 const CompletionEngines = [
@@ -241,8 +259,9 @@ const CompletionEngines = [
   Webster,
   Qwant,
   Brave,
+  Kagi,
 ];
 
 globalThis.CompletionEngines = CompletionEngines;
 
-export { Amazon, Brave, DuckDuckGo, Qwant, Webster };
+export { Amazon, Brave, DuckDuckGo, Kagi, Qwant, Webster };
